@@ -10,6 +10,7 @@ import http.server
 import socketserver
 import threading
 import os
+
 # --- إعدادات التوكنات والمفاتيح ---
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN") 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY") 
@@ -373,15 +374,6 @@ def main():
         pool_timeout=60
     )
      
-def run_server():
-    handler = http.server.SimpleHTTPRequestHandler
-    with socketserver.TCPServer(("", 8000), handler) as httpd:
-        print("Serving on port 8000")
-        httpd.serve_forever()
-
-# تشغيل الخادم في خيط جديد
-server_thread = threading.Thread(target=run_server)
-server_thread.start()	           
 
 if __name__ == "__main__":
     try:

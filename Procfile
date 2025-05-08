@@ -1,1 +1,1 @@
-web: deepseek.py
+web: python deepseek.py
