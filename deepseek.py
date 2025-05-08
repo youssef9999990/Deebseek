@@ -12,6 +12,7 @@ import threading
 import os
 
 # --- إعدادات التوكنات والمفاتيح ---
+
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN") 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY") 
 CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME")   # اسم القناة المطلوب الاشتراك فيها
@@ -368,12 +369,19 @@ def main():
         allowed_updates=Update.ALL_TYPES,
         drop_pending_updates=True,
         close_loop=False,
-        timeout=60,
-        read_timeout=60,
-        connect_timeout=30,
-        pool_timeout=60
+        # تم إزالة الوسيطات غير المدعومة
     )
-     
+    
+def run_server():
+    handler = http.server.SimpleHTTPRequestHandler
+    with socketserver.TCPServer(("", 8000), handler) as httpd:
+        print("Serving on port 8000")
+        httpd.serve_forever()
+
+# تشغيل الخادم في خيط جديد
+server_thread = threading.Thread(target=run_server)
+server_thread.start()	        
+        
 
 if __name__ == "__main__":
     try:
