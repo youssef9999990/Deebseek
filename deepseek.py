@@ -9,6 +9,7 @@ import time
 import http.server
 import socketserver
 import threading
+import os
 # --- إعدادات التوكنات والمفاتيح ---
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN") 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY") 
